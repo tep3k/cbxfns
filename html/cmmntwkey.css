@@ -4,6 +4,14 @@ body {
 	background-color: #181818;
 }
 
+#title {
+	font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",sans-serif;
+	font-size: 22px;
+	background-color: #181818;
+	color: #ccc;
+	font-weight:bold;
+}
+
 /* コメント欄 */
 ol {
 	list-style: none;

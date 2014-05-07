@@ -10,10 +10,13 @@ import (
 	"html/template"
 )
 
+const default_key string = "4444"
+
 type Comment struct {
 	Name		string
 	Date		time.Time
 	Comment	string
+	DelKey	string
 }
 
 type Page struct {
@@ -32,6 +35,8 @@ func init() {
 	http.HandleFunc("/comments", comments)
 	//投稿用URL
 	http.HandleFunc("/post", postComment)
+	//削除用URL
+	http.HandleFunc("/del", deleteComment)
 }
 
 func comments(w http.ResponseWriter, r *http.Request) {
@@ -64,13 +69,13 @@ func comments(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	
-	t, err := template.ParseFiles("cmmntwkey/cmmnt.html")
+	t, err := template.ParseFiles("cbfns/cmmnt.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, pageid)
+	//fmt.Fprint(w, pageid)
 	
 	if err := t.Execute(w, formatHtml(cmmtKey,cmmt)); err != nil {
 		c.Errorf("%v", err)
@@ -112,10 +117,14 @@ func postComment(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	
+
 	if r.FormValue("page_id") == "" {
 		http.Error(w, "param", http.StatusInternalServerError)
 		return
+	}
+	delKey := default_key
+	if r.FormValue("post_key") != "" {
+		delKey = r.FormValue("post_key")
 	}
 	
 	pg := &Page{
@@ -128,9 +137,14 @@ func postComment(w http.ResponseWriter, r *http.Request) {
 		Name:			r.FormValue("name"),
 		Date:			time.Now(),
 		Comment:	r.FormValue("comment"),
+		DelKey:		delKey,
 	}
 	
 	datastore.Put(c, datastore.NewIncompleteKey(c, "Comment", pageKey), cmmt)
 	
+	http.Redirect(w, r, "/comments?page_id=" + r.FormValue("page_id"), http.StatusFound)
+}
+
+func deleteComment(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/comments?page_id=" + r.FormValue("page_id"), http.StatusFound)
 }
