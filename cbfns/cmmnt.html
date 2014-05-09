@@ -1,3 +1,5 @@
+
+{{define "header"}}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,6 +11,8 @@
 	</head>
 	<body>
 		<div id="title">コメント欄</div>
+{{end}}
+{{define "comment-list"}}
 		<ol id="comment-list" class="comment-list" >
 			{{range .}}
 			<li id="{{.Id}}">
@@ -20,12 +24,17 @@
 			</li>
 			{{end}}
 		</ol>
+{{end}}
+{{define "form"}}
 		<form method="post" action="../post">
-			<input type="hidden" name="page_id" id="page_id" value="1">
+			<input type="hidden" name="page_id" id="page_id" value="{{.}}">
 			<input type="text" name="name" id="post_name" class="post">
-			<input type="text" name="key" id="post_key" class="post">
+			<input type="password" name="key" id="post_key" class="post">
 			<textarea name="comment" id="post_comment" class="post" rows="3" cols="60"></textarea>
 			<div><input type="submit" value="送信"></div>
 		</form>
+{{end}}
+{{define "footer"}}
 	</body>
 </html>
+{{end}}

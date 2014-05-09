@@ -37,6 +37,8 @@ func init() {
 	http.HandleFunc("/post", postComment)
 	//削除用URL
 	http.HandleFunc("/del", deleteComment)
+	//設定用URL
+	http.HandleFunc("/setting", editSetting)
 }
 
 func comments(w http.ResponseWriter, r *http.Request) {
@@ -63,6 +65,7 @@ func comments(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	
+	// tyepがjsonだった場合はjsonを返却し終了
 	if r.FormValue("type") == "json"{
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Fprint(w, string(encodingJSON(formatHtml(cmmtKey,cmmt))))
@@ -77,7 +80,13 @@ func comments(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	//fmt.Fprint(w, pageid)
 	
-	if err := t.Execute(w, formatHtml(cmmtKey,cmmt)); err != nil {
+	// テンプレートhtmlから出力用html生成
+	t.ExecuteTemplate(w, "header", nil)
+	t.ExecuteTemplate(w, "comment-list", formatHtml(cmmtKey,cmmt))
+	t.ExecuteTemplate(w, "form", pageid)
+	t.ExecuteTemplate(w, "footer", nil)
+
+	if err := t.Execute(w, nil); err != nil {
 		c.Errorf("%v", err)
 	}
 }
@@ -145,6 +154,11 @@ func postComment(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/comments?page_id=" + r.FormValue("page_id"), http.StatusFound)
 }
 
+
 func deleteComment(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/comments?page_id=" + r.FormValue("page_id"), http.StatusFound)
+}
+
+func editSetting(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/comments?page_id=" + r.FormValue("page_id"), http.StatusFound)
 }
