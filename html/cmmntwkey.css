@@ -10,6 +10,7 @@ body {
 	background-color: #181818;
 	color: #ccc;
 	font-weight:bold;
+	color: #EF7598;
 }
 
 /* コメント欄 */
@@ -27,8 +28,9 @@ border: 1px solid rgba(19, 1, 1, 0.1);
 background-clip: padding-box;
 }
 
-.comment-name{margin:2px; width:55%; float:left; font-weight:bold; color: #eee;}
-.comment-date{margin:2px; width:40%; float:right; text-align:right;}
+.comment-name{margin:2px; float:left; font-weight:bold; color: #EF7598;}
+.comment-date{padding-left: 4px; margin:2px; float:left; text-align:left;}
+.comment-delete-button{margin:2px; float:right; text-align:right;}
 .comment-body{width:100%; clear:left; white-space: pre-wrap!important;}
 
 /* 入力フォーム */
