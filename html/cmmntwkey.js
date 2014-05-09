@@ -7,16 +7,27 @@ $(function(){
         //focus時にdefaultValuesの値だった場合は入力値を削除
         if($(this).val() == defaultValues[$(this).attr("id")]){
         	$(this).css('color', '#fff').val('');
+            //post_keyの場合、入力値使用としたタイミングでtypeをpasswordへ
+            if(this.id == "post_key"){
+                $("#post_key")[0].type = "password";
+            }
         }
     }).blur(function() {
         //blur時に入力値が空だった場合はdefaultValuesを入れる
         if(jQuery.trim($(this).val()) == "") {
             $(this).css('color', '#999').val(defaultValues[$(this).attr("id")]);
+            //post_keyの場合入力が完了して空文字だった場合はtypeをtextへ
+            if(this.id == "post_key"){
+                $("#post_key")[0].type = "text";
+            }
         }
     }).ready(function(){
         //入力フォームのデフォルト値設定
         for(key in defaultValues){
             $("#" + key).css('color', '#999').val(defaultValues[key]);
+            if(key == "post_key"){
+                $("#" + key)[0].type = "text";
+            }
         }
     });
 
