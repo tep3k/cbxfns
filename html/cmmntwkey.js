@@ -30,6 +30,16 @@ $(function(){
             }
         }
     });
+/*
+    //読み込みが完了したら親フレーム側の縦幅を変更
+    $.ready(function() {
+        frameResize();
+    });
+*/
+    // 親フレームの準備完了時
+    $("#cbfns", window.parent.document).ready(function() {
+        frameResize();
+    });
 
     // submit時の操作
     $("form").submit(function() {
@@ -45,12 +55,6 @@ $(function(){
         }
         return true;
     });
-
-    // 親フレームの準備完了時
-    $("#cbfns", window.parent.document).ready(function() {
-        frameResize();
-    });
-
     
     //テキストエリア高さの自動調整
     var ta = $("#post_comment")[0];
