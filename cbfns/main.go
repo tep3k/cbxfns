@@ -10,13 +10,10 @@ import (
 	"html/template"
 )
 
-const default_key string = "0000"
-
 type Comment struct {
 	Name		string
 	Date		time.Time
 	Comment	string
-	DelKey	string
 }
 
 type Page struct {
@@ -131,10 +128,6 @@ func postComment(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "param", http.StatusInternalServerError)
 		return
 	}
-	delKey := default_key
-	if r.FormValue("post_key") != "" {
-		delKey = r.FormValue("post_key")
-	}
 	
 	pg := &Page{
 		PageId:		r.FormValue("page_id"),
@@ -146,7 +139,6 @@ func postComment(w http.ResponseWriter, r *http.Request) {
 		Name:			r.FormValue("name"),
 		Date:			time.Now(),
 		Comment:	r.FormValue("comment"),
-		DelKey:		delKey,
 	}
 	
 	datastore.Put(c, datastore.NewIncompleteKey(c, "Comment", pageKey), cmmt)
