@@ -39,7 +39,8 @@ li {
 /* 入力フォーム */
 .post {
 	font-family: Meiryo,"MS PGothic",arial,sans-serif;
-	background-color: #444;
+	background-color: #444!important;
+	color: #bbb!important;
 	border: none;
 	/* 各丸 */
 	border-radius: 5px;					/* CSS3草案 */  
