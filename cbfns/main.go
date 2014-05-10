@@ -10,7 +10,7 @@ import (
 	"html/template"
 )
 
-const default_key string = "4444"
+const default_key string = "0000"
 
 type Comment struct {
 	Name		string
