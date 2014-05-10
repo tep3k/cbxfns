@@ -10,7 +10,7 @@ body {
 	background-color: #181818;
 	color: #ccc;
 	font-weight:bold;
-	color: #EF7598;
+	color: #EF75BC;
 }
 
 /* コメント欄 */
@@ -31,7 +31,7 @@ li {
 	-moz-border-radius: 5px;		/* Firefox用 */ 
 }
 
-.comment-name{margin:2px; float:left; font-weight:bold; color: #EF7598;}
+.comment-name{margin:2px; float:left; font-weight:bold; color: #EF75BC;}
 .comment-date{padding-left: 4px; margin:2px; float:left; text-align:left;}
 .comment-delete-button{margin:2px; float:right; text-align:right;}
 .comment-body{width:100%; clear:left; white-space: pre-wrap!important;}
@@ -47,6 +47,6 @@ li {
 	-webkit-border-radius: 5px;	/* Safari,Google Chrome用 */  
 	-moz-border-radius: 5px;		/* Firefox用 */ 
 }
+
 #post_name{margin:2px; width:30%; float:left;}
-#post_key{margin:2px; width:20%; float:left;}
 #post_comment{width:100%; clear:left;}
