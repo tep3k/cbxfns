@@ -18,17 +18,6 @@ $(function(){
             $("#" + key).val(defaultValues[key]);
         }
     });
-/*
-    //読み込みが完了したら親フレーム側の縦幅を変更
-    $.ready(function() {
-        frameResize();
-    });
-
-    // 親フレームの準備完了時
-    $("#cbfns", window.parent.document).ready(function() {
-        frameResize();
-    });
-*/
 
     // submit時の操作
     $("form").submit(function() {
@@ -45,6 +34,11 @@ $(function(){
         return true;
     });
 
+    //読み込みが完了したら親フレーム側の縦幅を変更
+    $(window).load(function() {
+        frameResize();
+    });
+
     //テキストエリア高さの自動調整
     var ta = $("#post_comment")[0];
     ta.style.overflow = "hidden";
@@ -56,10 +50,10 @@ $(function(){
     }
 
     function frameResize () {
-        //$("#cbfns", window.parent.document).height(document.body.scrollHeight);
         var target = parent.postMessage ? parent : (parent.document.postMessage ? parent.document : undefined);
         if (typeof target != "undefined" && document.body.scrollHeight){
-            target(document.body.scrollHeight, "*");
+            target.postMessage(document.body.scrollHeight, "http://localhost:8080");
+            target.postMessage(document.body.scrollHeight, "http://laila-diary.tumblr.com");
         }
     }
 
