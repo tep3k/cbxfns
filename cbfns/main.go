@@ -95,7 +95,8 @@ func formatHtml(key []*datastore.Key, c []Comment) []CommentFormatedHtml {
 		cfd := new (CommentFormatedHtml)
 		cfd.Id = key[i].IntID()
 		cfd.Name = v.Name
-		cfd.Date = v.Date.Format(timeformat)
+		jst := time.FixedZone("Asia/Tokyo", 9*60*60)
+		cfd.Date = v.Date.In(jst).Format(timeformat)
 		cfd.Comment = v.Comment
 		cfda = append(cfda , *cfd)
 	}
