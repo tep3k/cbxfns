@@ -142,7 +142,13 @@ func postComment(w http.ResponseWriter, r *http.Request) {
 		Comment:	r.FormValue("comment"),
 	}
 	
-	datastore.Put(c, datastore.NewIncompleteKey(c, "Comment", pageKey), cmmt)
+	if _, err := datastore.Put(c, datastore.NewIncompleteKey(c, "Comment", pageKey), cmmt); err != nil {
+        http.Error(w, err.Error(), 500)
+        fmt.Fprint(w, r.FormValue("name"))
+        fmt.Fprint(w, " - ")
+        fmt.Fprint(w, r.FormValue("comment"))
+        return
+    }
 	
 	http.Redirect(w, r, "/comments?page_id=" + r.FormValue("page_id"), http.StatusFound)
 }
