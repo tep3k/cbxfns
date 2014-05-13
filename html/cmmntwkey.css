@@ -50,3 +50,25 @@ li {
 
 #post_name{margin:2px; width:30%; float:left;}
 #post_comment{width:100%; clear:left;}
+#post_button{float:left;}
+#msg{margin-left:10px; margin-top:3px; float:left;}
+
+/* ポップアップ関連 */
+.hide {
+	width : 0px;
+	height : 0px;
+}
+
+.msg {
+	buttom:5px; left:40%	
+	font-family: Meiryo,"MS PGothic",arial,sans-serif;
+	background-color: #EF75BC;
+	color: #444;
+	border-radius: 2px;					/* CSS3草案 */  
+	-webkit-border-radius: 2px;	/* Safari,Google Chrome用 */  
+	-moz-border-radius: 2px;		/* Firefox用 */ 
+}
+
+.error {
+	background-color: #75EF84!important;
+}

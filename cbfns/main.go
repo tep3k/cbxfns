@@ -8,6 +8,7 @@ import (
 	"appengine"
 	"appengine/datastore"
 	"html/template"
+	"strconv"
 )
 
 type Comment struct {
@@ -147,6 +148,7 @@ func postComment(w http.ResponseWriter, r *http.Request) {
         fmt.Fprint(w, r.FormValue("name"))
         fmt.Fprint(w, " - ")
         fmt.Fprint(w, r.FormValue("comment"))
+        fmt.Fprint(w, "コメント数：" + strconv.Itoa(len(r.FormValue("comment"))))
         return
     }
 	

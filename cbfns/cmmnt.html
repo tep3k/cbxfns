@@ -27,10 +27,11 @@
 {{end}}
 {{define "form"}}
 		<form method="post" action="../post">
-			<input type="hidden" name="page_id" id="page_id" value="{{.}}">
+			<input type="hidden" name="page_id" id="page_id" value="{{.}}" maxlength=500>
 			<input type="text" name="name" id="post_name" class="post">
 			<textarea name="comment" id="post_comment" class="post" rows="3" cols="60"></textarea>
-			<div><input type="submit" value="送信"></div>
+			<div id="post_button"><input type="submit" value="送信"></div>
+			<div id="msg" class="msg hide"></div>
 		</form>
 {{end}}
 {{define "footer"}}
